@@ -12,14 +12,19 @@ button.addEventListener("click", function() {
 
 let age: number;
 age = 50;
+
 let personName: string;
 personName = 'Max';
+
 let toggle: boolean;
 toggle = true;
+
 let empty: null;
 empty = null;
+
 let notInitialize: undefined;
 notInitialize = undefined;
+
 let callback: (a: number) => number = (a) => {
   return 100 + a;
 };
