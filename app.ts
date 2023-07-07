@@ -1,21 +1,11 @@
-let info: {
-    officeId: number,
-    isOpened: boolean,
-    contacts: {
-        phone: string,
-        email: string,
-        address: {
-            city: string
-        }
-    }
-} = {
-    "officeId": 45,
-    "isOpened": false,
-    "contacts": {
-        "phone": "+79100000000",
-        "email": "my@email.ru",
-        "address": {
-            "city": "Москва"
-        }
-    }
+const skills: string[] = ['HTML', "JS", "React"];
+
+for (const skill of skills) {
+    console.log(skill.toLocaleLowerCase())
 };
+
+const res = skills.filter(s => s !== "HTML")
+    .map(s => s + "! ")
+    .reduce((a, b) => a + b);
+
+console.log(res);

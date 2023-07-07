@@ -1,8 +1,10 @@
 "use strict";
-function getFullName(firstName, surName) {
-    return `${firstName} ${surName}`;
+const skills = ['HTML', "JS", "React"];
+for (const skill of skills) {
+    console.log(skill.toLocaleLowerCase());
 }
-const getFullNameArrow = (firstName, surName) => {
-    return `${firstName} ${surName}`;
-};
-console.log(getFullName("Ivan", "Ivanov"));
+;
+const res = skills.filter(s => s !== "HTML")
+    .map(s => s + "! ")
+    .reduce((a, b) => a + b);
+console.log(res);
