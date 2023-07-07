@@ -1,9 +1,8 @@
-var button = document.querySelector("button");
-var input1 = document.getElementById("num1");
-var input2 = document.getElementById("num2");
-function add(num1, num2) {
-    return num1 + num2;
+"use strict";
+function getFullName(firstName, surName) {
+    return `${firstName} ${surName}`;
 }
-button.addEventListener("click", function () {
-    console.log(add(+input1.value, +input2.value));
-});
+const getFullNameArrow = (firstName, surName) => {
+    return `${firstName} ${surName}`;
+};
+console.log(getFullName("Ivan", "Ivanov"));
