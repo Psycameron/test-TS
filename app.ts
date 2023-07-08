@@ -1,11 +1,21 @@
-const skills: string[] = ['HTML', "JS", "React"];
+enum StatusCode {
+    SUCCESS = 1,
+    PENDING = 2,
+    FAILED = 3,
+}
 
-for (const skill of skills) {
-    console.log(skill.toLocaleLowerCase())
-};
+const res = {
+    message: "Success",
+    statusCode: 1,
+}
 
-const res = skills.filter(s => s !== "HTML")
-    .map(s => s + "! ")
-    .reduce((a, b) => a + b);
+if (res.statusCode === StatusCode.SUCCESS) {
+    console.log('success')
+}
 
-console.log(res);
+const enum Roles {
+    ADMIN = 1,
+    USER = 2,
+}
+
+const res2 = Roles.ADMIN;

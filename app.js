@@ -1,10 +1,15 @@
 "use strict";
-const skills = ['HTML', "JS", "React"];
-for (const skill of skills) {
-    console.log(skill.toLocaleLowerCase());
+var StatusCode;
+(function (StatusCode) {
+    StatusCode[StatusCode["SUCCESS"] = 1] = "SUCCESS";
+    StatusCode[StatusCode["PENDING"] = 2] = "PENDING";
+    StatusCode[StatusCode["FAILED"] = 3] = "FAILED";
+})(StatusCode || (StatusCode = {}));
+const res = {
+    message: "Success",
+    statusCode: 1,
+};
+if (res.statusCode === StatusCode.SUCCESS) {
+    console.log('success');
 }
-;
-const res = skills.filter(s => s !== "HTML")
-    .map(s => s + "! ")
-    .reduce((a, b) => a + b);
-console.log(res);
+const res2 = 1 /* Roles.ADMIN */;
