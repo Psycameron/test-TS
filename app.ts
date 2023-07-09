@@ -1,25 +1,31 @@
-function multiply(first: number, second?: number): number {
-    if (!second) {
-        return first * first;
-    }
-    return first * second;
+interface IPayment {
+    sum: number,
+    from: number,
+    to: number
 }
 
-interface UserPro {
-    login: string,
-    password?: {
-        type: "pro" | "basic"
-    }
+enum PaymentStatus {
+    Success = "success",
+    Failed = "failed"
 }
 
-function testPass(user: UserPro) {
-    const t = user.password?.type;
+interface IPaymentRequest extends IPayment{}
+
+interface DataSuccess extends IPayment{
+    databaseId: number,
 }
 
-function test(param?: number) {
-    const t = param ?? multiply(5);
-    return t;
+interface DataFailed {
+    errorMessage: string,
+    errorCode: number
 }
 
-console.log(test(11));
-console.log(test());
+interface PaymentSuccess {
+    status: PaymentStatus.Success,
+    data: DataSuccess,
+}
+
+interface PaymentFailed {
+    status: PaymentStatus.Failed,
+    data: DataFailed
+}
