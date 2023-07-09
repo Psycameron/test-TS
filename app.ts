@@ -1,26 +1,26 @@
-type httpMethod = "post" | "get";
-
-function fetchWithAuth(url: string, method: httpMethod): 1 | -1 {
-    return 1;
-}
-
-fetchWithAuth("s", "get")
-
-type User = {
+interface User {
     name: string,
     age: number,
     skills: string[]
+
+    log: (id: number) => string;
 }
 
-type Role = {
+interface Role {
     role: string,
 }
 
-type UserWithRole = User & Role;
+interface UserWithRole extends User, Role {
+    createAt: Date,
+}
 
 const user: UserWithRole = {
     name: "asdasd",
     age: 22,
     skills: ["1", "2"],
-    role: "admin"
+    role: "admin",
+    createAt: new Date(),
+    log(id) {
+        return "";
+    }
 }
