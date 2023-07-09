@@ -1,26 +1,25 @@
-interface User {
-    name: string,
-    age: number,
-    skills: string[]
-
-    log: (id: number) => string;
+function multiply(first: number, second?: number): number {
+    if (!second) {
+        return first * first;
+    }
+    return first * second;
 }
 
-interface Role {
-    role: string,
-}
-
-interface UserWithRole extends User, Role {
-    createAt: Date,
-}
-
-const user: UserWithRole = {
-    name: "asdasd",
-    age: 22,
-    skills: ["1", "2"],
-    role: "admin",
-    createAt: new Date(),
-    log(id) {
-        return "";
+interface UserPro {
+    login: string,
+    password?: {
+        type: "pro" | "basic"
     }
 }
+
+function testPass(user: UserPro) {
+    const t = user.password?.type;
+}
+
+function test(param?: number) {
+    const t = param ?? multiply(5);
+    return t;
+}
+
+console.log(test(11));
+console.log(test());
