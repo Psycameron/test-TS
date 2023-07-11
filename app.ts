@@ -1,31 +1,31 @@
-interface IPayment {
-    sum: number,
-    from: number,
-    to: number
+let a = 5;
+let b: string = a.toString();
+let e: string = new String(a).valueOf();
+let f: boolean = new Boolean(a).valueOf();
+
+let c = "sadsda";
+let d: number = parseInt(c);
+
+interface User {
+    name: string,
+    email: string,
+    login: string
 }
 
-enum PaymentStatus {
-    Success = "success",
-    Failed = "failed"
+const user: User = {
+    name: "Vasya",
+    email: "vasya@gmail.com",
+    login: "vasya"
 }
 
-interface IPaymentRequest extends IPayment{}
-
-interface DataSuccess extends IPayment{
-    databaseId: number,
+interface Admin {
+    name: string,
+    role: number
 }
 
-interface DataFailed {
-    errorMessage: string,
-    errorCode: number
-}
-
-interface PaymentSuccess {
-    status: PaymentStatus.Success,
-    data: DataSuccess,
-}
-
-interface PaymentFailed {
-    status: PaymentStatus.Failed,
-    data: DataFailed
+function userToAdmin(user: User): Admin {
+    return {
+        name: user.name,
+        role: 1
+    }
 }
