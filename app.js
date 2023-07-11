@@ -1,17 +1,32 @@
 "use strict";
-function multiply(first, second) {
-    if (!second) {
-        return first * first;
+var PaymentStatus;
+(function (PaymentStatus) {
+    PaymentStatus["Success"] = "success";
+    PaymentStatus["Failed"] = "failed";
+})(PaymentStatus || (PaymentStatus = {}));
+function isPaymentSuccess(res) {
+    if (res.status === PaymentStatus.Success) {
+        return true;
     }
-    return first * second;
+    else {
+        return false;
+    }
 }
-function testPass(user) {
-    var _a;
-    const t = (_a = user.password) === null || _a === void 0 ? void 0 : _a.type;
+function getIdFromData(res) {
+    if (isPaymentSuccess(res)) {
+        return res.data.databaseId;
+    }
+    else {
+        throw new Error(res.data.errorMessage);
+    }
 }
-function test(param) {
-    const t = param !== null && param !== void 0 ? param : multiply(5);
-    return t;
-}
-console.log(test(11));
-console.log(test());
+const successResult = {
+    status: PaymentStatus.Success,
+    data: {
+        databaseId: 567,
+        sum: 10000,
+        from: 2,
+        to: 4
+    }
+};
+getIdFromData(successResult);
