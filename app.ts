@@ -1,15 +1,12 @@
-let a = 5;
-let b: string = a.toString();
-let e: string = new String(a).valueOf();
-let f: boolean = new Boolean(a).valueOf();
-
-let c = "sadsda";
-let d: number = parseInt(c);
-
 interface User {
     name: string,
     email: string,
     login: string
+}
+
+interface Admin {
+    name: string,
+    role: number
 }
 
 const user: User = {
@@ -18,14 +15,14 @@ const user: User = {
     login: "vasya"
 }
 
-interface Admin {
-    name: string,
-    role: number
+function isAdmin(user: User | Admin): user is Admin {
+    return "role" in user;
 }
 
-function userToAdmin(user: User): Admin {
-    return {
-        name: user.name,
-        role: 1
+function setRoleZero(user: User | Admin) {
+    if (isAdmin(user)) {
+        user.role = 0;
+    } else {
+        throw new Error("User is not admin")
     }
 }
