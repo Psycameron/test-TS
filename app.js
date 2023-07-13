@@ -1,29 +1,19 @@
 "use strict";
-var PaymentStatus;
-(function (PaymentStatus) {
-    PaymentStatus[PaymentStatus["Holded"] = 0] = "Holded";
-    PaymentStatus[PaymentStatus["Processed"] = 1] = "Processed";
-    PaymentStatus[PaymentStatus["Reversed"] = 2] = "Reversed";
-})(PaymentStatus || (PaymentStatus = {}));
-class Payment {
-    constructor(id) {
-        this.status = PaymentStatus.Holded;
-        this.createAt = new Date();
-        this.id = id;
-    }
-    getPaymentLifeTime() {
-        return new Date().getTime() - this.createAt.getTime();
-    }
-    unholdPayment() {
-        if (this.status === PaymentStatus.Processed) {
-            throw new Error("This payment can't be a refunded");
+class User {
+    addSkill(skillOrSkills) {
+        if (typeof skillOrSkills === "string") {
+            this.skills.push(skillOrSkills);
         }
-        this.status = PaymentStatus.Reversed;
-        this.updateAt = new Date();
+        else {
+            this.skills.concat(skillOrSkills);
+        }
     }
 }
-const payment = new Payment(1);
-payment.unholdPayment();
-console.log(payment);
-const time = payment.getPaymentLifeTime();
-console.log(time);
+function run(distance) {
+    if (typeof distance === "number") {
+        return 1;
+    }
+    else {
+        return "";
+    }
+}
