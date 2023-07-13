@@ -1,18 +1,34 @@
-class User {
-	constructor(name: string) {
-		this.name = name;
+enum PaymentStatus {
+	Holded,
+	Processed,
+	Reversed
+}
+
+class Payment{
+	id: number;
+	status: PaymentStatus = PaymentStatus.Holded;
+	createAt: Date = new Date();
+	updateAt: Date;
+
+	constructor(id: number) {
+		this.id = id;
 	}
-	name: string;
+
+	getPaymentLifeTime(): number { 
+		return new Date().getTime() - this.createAt.getTime();
+	}
+
+	unholdPayment(): void {
+		if (this.status === PaymentStatus.Processed) {
+			throw new Error("This payment can't be a refunded")
+		}
+		this.status = PaymentStatus.Reversed;
+		this.updateAt = new Date();
+	}
 }
 
-const user = new User("Dima");
-console.log(user);
-user.name = "Vika";
-console.log(user);
-
-class Admin{
-	role: number;
-}
-
-const admin = new Admin();
-admin.role = 1;
+const payment = new Payment(1);
+payment.unholdPayment();
+console.log(payment);
+const time = payment.getPaymentLifeTime();
+console.log(time);
