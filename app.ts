@@ -1,19 +1,33 @@
-class User {
-	_login: string;
-	password: string;
-	createdAt: Date;
+interface ILogger {
+	log(...args): void;
+	error(...args): void;
 
-	set login(l: string) {
-		this._login = "user-" + l;
-		this.createdAt = new Date();
-	}
-
-	get login() {
-		return this._login;
-	}
 }
 
-const user = new User();
-user.login = "myLogin";
-console.log(user)
-console.log(user.login)
+class Logger implements ILogger {
+	log(...args: any[]): void {
+		console.log(...args)
+	}
+	error(...args: any[]): void {
+		console.log(...args)
+	}
+	
+}
+
+interface IPayable {
+	pay(payableId: number): void;
+	price?: number;
+}
+
+interface IDeletable {
+	delete(): void;
+}
+
+class User implements IPayable, IDeletable{
+	delete(): void {
+		throw new Error("Method not implemented.");
+	}
+	pay(payableId: number | string): void {
+		// 
+	}
+}
