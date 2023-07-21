@@ -1,33 +1,31 @@
-interface ILogger {
-	log(...args): void;
-	error(...args): void;
+type PaymentStatus = "new" | "paid";
 
-}
+class Payment {
+	id: number;
+	status: PaymentStatus = "new";
 
-class Logger implements ILogger {
-	log(...args: any[]): void {
-		console.log(...args)
+	constructor(id: number) {
+		this.id = id;
 	}
-	error(...args: any[]): void {
-		console.log(...args)
+
+	pay() {
+		this.status = "paid";
 	}
-	
 }
 
-interface IPayable {
-	pay(payableId: number): void;
-	price?: number;
-}
+class PersistedPayment extends Payment {
+	databaseId: number;
+	paidAt: Date;
 
-interface IDeletable {
-	delete(): void;
-}
-
-class User implements IPayable, IDeletable{
-	delete(): void {
-		throw new Error("Method not implemented.");
+	constructor() {
+		const id = Math.random();
+		super(id);
 	}
-	pay(payableId: number | string): void {
-		// 
+
+	override pay(date?: Date) {
+		super.pay();
+		if (date) {
+			this.paidAt = date;
+		}
 	}
 }

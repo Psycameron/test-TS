@@ -1,14 +1,22 @@
 "use strict";
-class User {
-    set login(l) {
-        this._login = "user-" + l;
-        this.createdAt = new Date();
+class Payment {
+    constructor(id) {
+        this.status = "new";
+        this.id = id;
     }
-    get login() {
-        return this._login;
+    pay() {
+        this.status = "paid";
     }
 }
-const user = new User();
-user.login = "myLogin";
-console.log(user);
-console.log(user.login);
+class PersistedPayment extends Payment {
+    constructor() {
+        const id = Math.random();
+        super(id);
+    }
+    pay(date) {
+        super.pay();
+        if (date) {
+            this.paidAt = date;
+        }
+    }
+}
