@@ -13,6 +13,8 @@ class PersistedPayment extends Payment {
         const id = Math.random();
         super(id);
     }
+    save() {
+    }
     pay(date) {
         super.pay();
         if (date) {
@@ -20,3 +22,17 @@ class PersistedPayment extends Payment {
         }
     }
 }
+class User {
+    constructor() {
+        this.name = "user";
+        console.log(this.name);
+    }
+}
+class Admin extends User {
+    constructor() {
+        super();
+        this.name = "admin";
+        console.log(this.name);
+    }
+}
+new Admin();
