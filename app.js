@@ -1,30 +1,61 @@
 "use strict";
-var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var _Vehicle_price;
-class Vehicle {
+class Product {
+    constructor(id, title, price) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+    }
+}
+class Delivery {
+    constructor(date) {
+        this.date = date;
+    }
+}
+class DeliveryToHome extends Delivery {
+    constructor(date, address) {
+        super(date);
+        this.address = address;
+    }
+}
+class DeliveryToShop extends Delivery {
+    constructor(shopId) {
+        super(new Date());
+        this.shopId = shopId;
+    }
+}
+class Cart {
     constructor() {
-        _Vehicle_price.set(this, void 0);
+        this.productList = [];
     }
-    set model(m) {
-        this._model = m;
-        __classPrivateFieldSet(this, _Vehicle_price, 100, "f");
+    addProduct(product) {
+        this.productList.push(product);
     }
-    get model() {
-        return this._model;
+    deleteProduct(productId) {
+        this.productList = this.productList.filter((product) => product.id !== productId);
     }
-    addDamage(damage) {
-        this.damages.push(damage);
+    countPrice() {
+        return this.productList.map((p) => p.price).reduce((p1, p2) => {
+            return p1 + p2;
+        }, 0);
+    }
+    setDelivery(delivery) {
+        this.delivery = delivery;
+    }
+    checkOut() {
+        if (this.productList.length === 0) {
+            throw new Error("The cart is empty! Add the products");
+        }
+        if (!this.delivery) {
+            throw new Error("Choose delivery method");
+        }
+        return { success: true };
     }
 }
-_Vehicle_price = new WeakMap();
-class EuroTruck extends Vehicle {
-    setRun(km) {
-        this.run = km / 0.62;
-    }
-}
-new Vehicle();
+const cart = new Cart();
+cart.addProduct(new Product(1, "Cookie", 30));
+cart.addProduct(new Product(2, "Cake", 100));
+cart.addProduct(new Product(3, "Chocolate", 70));
+cart.deleteProduct(1);
+cart.setDelivery(new DeliveryToHome(new Date(), "to home"));
+console.log(cart.countPrice());
+console.log(cart.checkOut());
