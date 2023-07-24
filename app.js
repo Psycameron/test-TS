@@ -1,15 +1,22 @@
 "use strict";
-class Controller {
-    handleWithLogs(req) {
-        console.log("Start");
-        this.handle(req);
-        console.log("End");
+// Необходимо реализовать абстрактный класс Logger с 2-мя методами
+// абстрактным - log(message): void
+// printDate - выводящий в log дату
+// К нему необходимо сделать реальный класс, который бы имел метод: logWithDate,
+// выводящий сначала дату, а потом заданное сообщение
+class Logger {
+    printDate(date) {
+        this.log(date.toString());
     }
 }
-class UserController extends Controller {
-    handle(req) {
-        console.log(req);
+class LoggerDate extends Logger {
+    log(message) {
+        console.log(message);
+    }
+    logWithDate(date, message) {
+        this.printDate(date);
+        this.log(message);
     }
 }
-const user = new UserController();
-user.handleWithLogs("req");
+const l = new LoggerDate();
+l.logWithDate(new Date(), "hello");
