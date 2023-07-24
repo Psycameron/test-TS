@@ -1,27 +1,18 @@
-class UserBuilder {
-	name: string;
+abstract class Controller {
+	abstract handle(req: any): void
 
-	setName(name: string): this {
-		this.name = name;
-		return this;
-	}
-
-	isAdmin(): this is AdminBuilder {
-		return this instanceof AdminBuilder
+	handleWithLogs(req: any) {
+		console.log("Start")
+		this.handle(req);
+		console.log("End")
 	}
 }
 
-class AdminBuilder extends UserBuilder {
-	roles: string[];
+class UserController extends Controller {
+	handle(req: any): void {
+		console.log(req)
+	}
 }
 
-const res = new UserBuilder().setName("Poly");
-const res2 = new AdminBuilder().setName("Ajax");
-
-let user: UserBuilder | AdminBuilder = new UserBuilder();
-
-if (user.isAdmin()) {
-	console.log(user)
-} else {
-	console.log(user)
-}
+const user = new UserController();
+user.handleWithLogs("req")
